@@ -1,20 +1,20 @@
 class Solution {
     public int findMin(int[] nums) {
-        return findMin(nums, 0 , nums.length-1);
-    }
-    public int findMin(int[] nums, int left, int right)
-    {
-        if(left == right)
-            return nums[left];
-        if(right-left == 1)
-            return Math.min(nums[left], nums[right]);
-        int middle = left + (right-left)/2;
-        if (nums[left]<nums[right]) {
-            return nums[left];
-        } else if (nums[middle]>nums[left]) {
-            return findMin(nums, middle, right);
-        } else {
-            return findMin(nums, left, middle);
+        if(nums.length==1)
+            return nums[0];
+        int left=0,right=nums.length-1;
+        if(nums[right]>nums[0])
+            return nums[0];
+        while(right>left)
+        {
+            int mid=(left+right)/2;
+            if(nums[mid]>=nums[0]){
+                left=mid+1;
+            }
+            else
+                right=mid;
         }
+        return nums[right];
+        
     }
 }
