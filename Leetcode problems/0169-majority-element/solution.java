@@ -13,16 +13,15 @@ class Solution {
             ht.put(nums[i],ht.get(nums[i])+1);
         }
         int maxvalue=Collections.max(ht.values());
-        for (Map.Entry<Integer, Integer> entry :
-             ht.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : ht.entrySet()) {
  
             if (entry.getValue() == maxvalue) {
                 return entry.getKey();
 
-    }
+            }
 
-}
- return 0;
+        }
+        return 0;
     }
    
 }
