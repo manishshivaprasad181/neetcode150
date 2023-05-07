@@ -15,27 +15,28 @@
  */
 class Solution {
     public List<Double> averageOfLevels(TreeNode root) {
-        List<Integer> count=new ArrayList<>();
-        List<Double> res=new ArrayList<>();
-        average(root,0,res,count);
-        for(int i=0;i<res.size();i++)
-            res.set(i,res.get(i)/count.get(i));
-        return res;
-        
-    }
-    public void average(TreeNode t,int i,List<Double> sum,List<Integer> count){
-        if(t==null)
-        return;
-        if(i<sum.size()){
-            sum.set(i,sum.get(i)+t.val);
-            count.set(i,count.get(i)+1);
-        }
-        else
+        List<Double> result=new ArrayList<>();
+        if(root==null)
+        return result;
+        Queue<TreeNode> queue=new LinkedList<>();
+        queue.add(root);
+        double level_sum=0;
+        while(!queue.isEmpty())
         {
-            sum.add(1.0*t.val);
-            count.add(1);
+            level_sum=0;
+            int size=queue.size();
+            for(int i=0;i<size;i++)
+            {
+                TreeNode current_node=queue.poll();
+                level_sum+=current_node.val;
+                if(current_node.left!=null)
+                queue.offer(current_node.left);
+                if(current_node.right!=null)
+                queue.offer(current_node.right);
+            }
+            double level_avg=level_sum/size;
+            result.add(level_avg);
         }
-        average(t.left,i+1,sum,count);
-        average(t.right,i+1,sum,count);
+        return result;
     }
 }
