@@ -1,15 +1,15 @@
+import java.util.Hashtable;
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer,Integer> hm=new HashMap<>();
+        Hashtable<Integer,Integer> ht=new Hashtable<>();
         for(int i=0;i<nums.length;i++)
-        {
-            int diff=target-nums[i];
-            if(hm.containsKey(diff))
-                return new int[]{i,hm.get(diff)};
+        {   
+            int comp=target-nums[i];
+            if(ht.containsKey(comp))
+            return new int[]{i,ht.get(comp)};
             else
-                hm.put(nums[i],i);
+            ht.put(nums[i],i);
         }
         return null;
-        
     }
 }
