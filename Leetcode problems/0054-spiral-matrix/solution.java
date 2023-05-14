@@ -3,10 +3,10 @@ class Solution {
       List<Integer> result = new ArrayList<>();
       int rows = matrix.length;
       int cols = matrix[0].length;
-      int up =0;
-      int down = rows-1;
       int left=0;
-      int right=cols-1;
+      int right= matrix[0].length-1;
+      int up=0;
+      int down= rows-1;
       while(result.size()<rows*cols) {
         for(int col=left;col<=right;col++)
           result.add(matrix[up][col]);
@@ -17,9 +17,8 @@ class Solution {
             result.add(matrix[down][col]);
         }
         if(left!=right) {
-          for(int row=down-1;row>up;row--)
+          for(int row=down-1;row>up;row--) 
             result.add(matrix[row][left]);
-
         }
         up++;
         down--;
