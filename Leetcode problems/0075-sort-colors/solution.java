@@ -3,19 +3,18 @@ class Solution {
         int p0=0;
         int p2=nums.length-1;
         int curr=0;
-        int tmp =0;
+        int tmp=0;
         while(curr<=p2) {
             if(nums[curr]==0) {
-                tmp = nums[curr];
-                nums[curr++]= nums[p0];
-                nums[p0++] = tmp;
+                tmp =nums[curr];
+                nums[curr++] = nums[p0];
+                nums[p0++]=tmp;
             } else if(nums[curr]==2) {
-                tmp = nums[curr];
-                nums[curr] = nums[p2];
+                tmp=nums[curr];
+                nums[curr] =nums[p2];
                 nums[p2--] = tmp;
-            } else  
+            } else
                 curr++;
         }
-
     }
 }
