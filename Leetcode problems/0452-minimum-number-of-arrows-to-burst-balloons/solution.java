@@ -4,14 +4,13 @@ class Solution {
 
         Arrays.sort(points, (a,b)->Integer.compare(a[1],b[1]));
         int arrows=1;
-        int xStart, xEnd, firstEnd = points[0][1];
+        int xstart,xend,firstend=points[0][1];
         for(int[] point:points) {
-            xStart = point[0];
-            xEnd = point[1];
-
-            if(firstEnd<xStart) {
+            xstart=point[0];
+            xend=point[1];
+            if(firstend<xstart)  {
                 arrows++;
-                firstEnd = xEnd;
+                firstend=xend;
             }
         }
         return arrows;
