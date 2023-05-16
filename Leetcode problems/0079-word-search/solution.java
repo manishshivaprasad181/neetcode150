@@ -1,33 +1,32 @@
 class Solution {
-    private char[][] board;
-    private int rows;
-    private int cols;
+    boolean visited[][];
     public boolean exist(char[][] board, String word) {
-        this.board = board;
-        this.rows = board.length;
-        this.cols = board[0].length;
-        for(int i =0;i<rows;i++)
-            for(int j =0;j<cols;j++)    
-                if(backtrack(i, j, word, 0))
-                    return true;
-        return false;
-     }
-     private boolean backtrack(int row, int col, String word, int index) {
-         if(index>=word.length())
-            return true;
-        if(row<0||row==this.rows|| col<0||col == this.cols|| this.board[row][col]!= word.charAt(index))
-           return false;
-        int[] rowoffset = {0,1,0,-1};
-        int[] coloffset = {1,0,-1,0};
-        boolean ret = false;
-        this.board[row][col] = '#';
-        for(int i =0;i<4;i++) {
-            ret = backtrack(row+rowoffset[i], col+coloffset[i], word, index+1);
-            if(ret)
-                break;
+        int rows=board.length;
+        int columns=board[0].length;
+        visited=new boolean[rows][columns];
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<columns;j++){
+                if(word.charAt(0)==board[i][j]&&searchword( i, j,0,word,board))
+                return true;
+            }
         }
-        this.board[row][col] = word.charAt(index);
-        return ret;
-     }
+        return false;
 
+    }
+    public boolean searchword(int i,int j,int index,String word,char[][] board){
+        if(index==word.length())
+        return true;
+        if(i<0||i>=board.length||j<0||j>=board[i].length||word.charAt(index)!=board[i][j]||visited[i][j])
+        return false;
+        visited[i][j]=true;
+        if( searchword(i+1,j,index+1,word,board)||
+            searchword(i-1,j,index+1,word,board)||
+            searchword(i,j+1,index+1,word,board)||
+            searchword(i,j-1,index+1,word,board))
+            return true;
+    
+    visited[i][j]=false;
+    return false;
+}
 }
