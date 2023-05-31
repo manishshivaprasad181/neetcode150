@@ -6,12 +6,12 @@ class Solution {
         int result=max_so_far;
         for(int i=1;i<nums.length;i++)
         {
-            int current=nums[i];
-                        int temp_max=Math.max(current,Math.max(min_so_far*current,max_so_far*current));
-            min_so_far=Math.min(current,Math.min(max_so_far*current,min_so_far*current));
+            int curr=nums[i];
+            int temp_max=Math.max(curr,Math.max(curr*max_so_far,curr*min_so_far));
+            min_so_far=Math.min(curr,Math.min(max_so_far*curr,min_so_far*curr));
             max_so_far=temp_max;
             result=Math.max(max_so_far,result);
         }
-       return result;
+        return result;
     }
 }
