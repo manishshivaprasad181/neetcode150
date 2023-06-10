@@ -19,24 +19,22 @@ class Solution {
             for(int m =j;m<s2;m++) {
                 temp[k] = nums2[m];
                 k++;
-
             }
-        
         }
         if(j>=s2) {
             for(int n =i;n<s1;n++) {
                 temp[k] = nums1[n];
                 k++;
-
             }
-        
         }
-        double ans = 0.0;
+        double ans=0.0;
         if(temp.length%2!=0) {
             ans = temp[temp.length/2];
-        } else {
-            ans = (temp[temp.length/2] + temp[temp.length/2-1])/2;
+
+        }  else {
+            ans = (temp[temp.length/2] +temp[temp.length/2-1])/2;
         }
         return ans;
+
     }
 }
