@@ -1,34 +1,48 @@
-class Solution {
-    private static final int EMPTY = Integer.MAX_VALUE;
-    private static final int GATE = 0;
-    private static final List<int[]> DIRECTIONS = Arrays.asList(new int[] {1,0}, new int[] {-1,0}, new int[] {0,1}, new int[] {0,-1});
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Queue;
+import java.util.Set;
 
+public class Solution {
     public void wallsAndGates(int[][] rooms) {
-        int m = rooms.length;
-        int n = rooms[0].length;
-        if(m==0) return;
-        Queue<int[]> q = new LinkedList<>();
-        for(int row=0;row<m;row++) {
-            for(int col=0;col<n;col++) {
-                if(rooms[row][col]==GATE)
-                    q.add(new int[] {row,col});
-            }
-        }
-        while(!q.isEmpty()) {
-            int[] point= q.poll();
-            int row = point[0];
-            int col = point[1];
-            for(int[] dir:DIRECTIONS) {
-                int r = row+dir[0];
-                int c = col+dir[1];
-                if(r<0||c<0||r>=m||c>=n||rooms[r][c]!=EMPTY) 
-                    continue;
-                rooms[r][c] = rooms[row][col]+1;
-                q.add(new int[] {r,c});
-            }
-        }
-        
-    
+        int ROWS = rooms.length;
+        int COLS = rooms[0].length;
+        Set<Pair<Integer, Integer>> visit = new HashSet<>();
+        Queue<Pair<Integer, Integer>> q = new ArrayDeque<>();
 
+        for (int r = 0; r < ROWS; r++) {
+            for (int c = 0; c < COLS; c++) {
+                if (rooms[r][c] == 0) {
+                    q.add(new Pair<>(r, c));
+                    visit.add(new Pair<>(r, c));
+                }
+            }
+        }
+
+        int dist = 0;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                Pair<Integer, Integer> pair = q.poll();
+                int r = pair.getKey();
+                int c = pair.getValue();
+                rooms[r][c] = dist;
+                addRooms(r + 1, c, ROWS, COLS, visit, q, rooms);
+                addRooms(r - 1, c, ROWS, COLS, visit, q, rooms);
+                addRooms(r, c + 1, ROWS, COLS, visit, q, rooms);
+                addRooms(r, c - 1, ROWS, COLS, visit, q, rooms);
+            }
+            dist++;
+        }
+    }
+
+    private void addRooms(int r, int c, int ROWS, int COLS, Set<Pair<Integer, Integer>> visit,
+                          Queue<Pair<Integer, Integer>> q, int[][] rooms) {
+        if (r < 0 || c < 0 || r == ROWS || c == COLS || visit.contains(new Pair<>(r, c)) || rooms[r][c] == -1) {
+            return;
+        }
+        visit.add(new Pair<>(r, c));
+        q.add(new Pair<>(r, c));
     }
 }
+
