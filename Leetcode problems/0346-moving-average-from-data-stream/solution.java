@@ -1,28 +1,22 @@
 class MovingAverage {
-    private int size;
     private Queue<Integer> window;
-    private double sum;
+    int maxSize;
+    double sum;
 
     public MovingAverage(int size) {
-        this.size = size;
-        this.window = new LinkedList<>();
-        this.sum = 0.0;
-        
-        
-        
+        window = new LinkedList<>();
+        maxSize = size;
+        sum =0.0;
         
     }
     
     public double next(int val) {
-        if(window.size()==size) {
+        if(window.size() == maxSize) {
             sum-= window.poll();
-            
         }
         window.offer(val);
         sum+= val;
-        
         return sum/window.size();
-        
     }
 }
 
