@@ -1,17 +1,22 @@
 class Solution {
     public int reverse(int x) {
-       int reversed =0;
-        while(x!=0) {
-            int digit = x%10;
-            int new_reversed = reversed*10+digit;
-            
-            if((new_reversed-digit)/10!=reversed) {
-                return 0;
-                
-            }
-            reversed = new_reversed;
-            x=x/10;
+        boolean isNegative = false;
+        long reverse =0;
+        
+        if(x<0) {
+            isNegative = true;
+            x = -x;
         }
-        return reversed;
+        while(x>0) {
+            reverse = reverse*10+x%10;
+            x=x/10;
+            
+        }
+        if(reverse>Integer.MAX_VALUE)
+            return 0;
+        
+        return (int)(isNegative? -reverse: reverse);
+        
+        
     }
 }
