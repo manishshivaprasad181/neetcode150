@@ -8,10 +8,9 @@ class Solution {
         while(y.compareTo(zero)!=0) {
             answer = x.xor(y);
             carry = x.and(y).shiftLeft(1);
-            x = answer;
-            y= carry;
+            x= answer;
+            y=carry;
         }
         return x.toString(2);
-        
     }
 }
