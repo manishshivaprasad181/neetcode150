@@ -1,29 +1,28 @@
 class Solution {
     public int findMaxFish(int[][] grid) {
         int maxFish =0;
-        int row = grid.length;
-        int col = grid[0].length;
-        boolean[][] visited = new boolean[row][col];
+        int rows = grid.length;
+        int cols = grid[0].length;
+        boolean[][] visited = new boolean[rows][cols];
 
-        for(int i =0;i<row;i++) {
-            for(int j =0;j<col;j++) {
-                if(!visited[i][j]&& grid[i][j]>0) 
-                    maxFish = Math.max(maxFish, dfs(grid, i , j, visited));
-
+        for(int i=0;i<rows;i++) {
+            for(int j=0;j<cols;j++) {
+                if(!visited[i][j] && grid[i][j]>0)
+                    maxFish = Math.max(maxFish, dfs(grid, visited, i, j));
             }
-        }  
+        }
         return maxFish;
     }
-    private int dfs(int[][] grid, int i, int j, boolean[][] visited) {
-        if(i<0|| j<0|| i>= grid.length|| j>= grid[0].length|| visited[i][j]|| grid[i][j]==0)
-        return 0;
-        visited[i][j]= true;
+    private int dfs(int[][] grid, boolean[][] visited, int i, int j) {
+        if(i<0 || i>= grid.length || j<0 || j>=grid[0].length || visited[i][j] ==true|| grid[i][j]==0)
+            return 0;
         int total = grid[i][j];
+        visited[i][j] =true;
 
-        total+= dfs(grid, i-1,j, visited);
-        total+= dfs(grid, i, j-1, visited);
-        total+= dfs(grid, i+1, j, visited);
-        total+= dfs(grid, i, j+1, visited);
+        total+=dfs(grid, visited, i+1,j);
+        total+=dfs(grid, visited, i, j+1);
+        total+=dfs(grid, visited, i-1, j);
+        total+=dfs(grid, visited, i, j-1);
 
         return total;
     }
