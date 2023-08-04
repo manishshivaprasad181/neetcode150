@@ -1,23 +1,27 @@
 class Solution {
     public int[][] kClosest(int[][] points, int k) {
         int N = points.length;
-        int[] dists = new int[N];
+        int[] dist = new int[N];
 
-        for(int i =0;i<N;i++) {
-            dists[i] = dist(points[i]);
+        for(int i=0;i<N;i++) {
+            dist[i] = finddist(points[i]);
+
         }
-        Arrays.sort(dists);
-        int distK = dists[k-1];
-
+        Arrays.sort(dist);
+        int distK = dist[k-1];
         int[][] ans = new int[k][2];
-        int t=0;
-        for(int i =0;i<N;i++) {
-            if(dist(points[i])<=distK)
-                ans[t++] = points[i];
+        int j =0;
+        for(int i=0;i<N;i++) {
+            if(finddist(points[i])<=distK)
+                ans[j++] = points[i];
         }
-    return ans;
+
+        return ans;
+
+
     }
-    private int dist(int[] point) {
-        return point[0]*point[0]+ point[1]*point[1];
+    private int finddist(int[] point) {
+
+        return point[0]*point[0] + point[1]*point[1];
     }
 }
