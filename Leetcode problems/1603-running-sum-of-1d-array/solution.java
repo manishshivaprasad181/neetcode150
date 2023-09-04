@@ -1,17 +1,10 @@
 class Solution {
     public int[] runningSum(int[] nums) {
-        int[] runningsum = new int[nums.length];
-        calculateSum(nums, runningsum, nums.length-1);
-        return runningsum;
-    }
-    
-    private int calculateSum(int[] nums, int[] runningsum, int index) {
-        if(index==0) {
-            runningsum[index] = nums[index];
-            
+        int sum=0;
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
+            nums[i]=sum;
         }
-        else 
-            runningsum[index] = nums[index] +calculateSum(nums, runningsum, index-1);
-        return runningsum[index];
+        return nums;
     }
 }
