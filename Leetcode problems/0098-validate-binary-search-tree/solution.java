@@ -14,16 +14,15 @@
  * }
  */
 class Solution {
-    public boolean validate(TreeNode root, Integer low, Integer high) {
+    public boolean isBST(TreeNode root, Integer low, Integer high) {
         if(root==null)
             return true;
-        if(low!=null && root.val<=low || high!=null && root.val >=high)
+        if(low!=null && root.val<=low || high!=null && root.val>=high)
             return false;
-        return validate(root.right, root.val, high) && validate(root.left, low, root.val);
+        return isBST(root.right, root.val, high) && isBST(root.left, low, root.val);
     }
-    
     public boolean isValidBST(TreeNode root) {
-        return validate(root, null,null);
-        
+        return isBST(root, null, null);
+
     }
 }
