@@ -1,24 +1,42 @@
 class Solution {
     public int evalRPN(String[] tokens) {
-       Stack<Integer> st = new Stack<>();
+       Stack<Integer> st=new Stack<>();
+       HashSet<String> hs=new HashSet<>();
+       hs.add("+");
+       hs.add("*");
+       hs.add("/");
+       hs.add("-");
+       for(int i=0;i<tokens.length;i++)
+       {
+           if(!hs.contains(tokens[i]))
+           {
+               st.push(Integer.parseInt(tokens[i]));
+           }
+           else
+           {
+               if(tokens[i].equals("+"))
+               {
+                   st.push(st.pop()+st.pop());
+               }
+               else if(tokens[i].equals("-"))
+               {
+                   int x=st.pop();
+                   int y=st.pop();
+                   st.push(y-x);
+               }
+               else if(tokens[i].equals("*"))
+               {
+                   st.push(st.pop()*st.pop());
 
-       for(int i=0;i<tokens.length;i++) {
-           if(tokens[i].equals("+")||tokens[i].equals("-")||tokens[i].equals("*")||tokens[i].equals("/")) {
-               int first = st.pop();
-               int second = st.pop();
-
-                if(tokens[i].equals("+"))
-                    st.push(first+second);
-                else if(tokens[i].equals("-"))
-                    st.push(second-first);
-                else if(tokens[i].equals("*"))
-                    st.push(first*second);
-                else
-                    st.push(second/first);
-           } else
-                st.push(Integer.parseInt(tokens[i]));
-    
+               }
+               else
+               {
+                   int x=st.pop();
+                   int y=st.pop();
+                   st.push(y/x);
+               }
+           }
        }
-       return st.peek();
+       return st.pop(); 
     }
 }
