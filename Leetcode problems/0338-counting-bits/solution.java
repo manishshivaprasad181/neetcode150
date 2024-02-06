@@ -1,15 +1,18 @@
 class Solution {
-    public int[] countBits(int n) {
-        int[] dp=new int[n+1];
-        dp[0]=0;
-        int offset=1;
-        for(int i=1;i<n+1;i++)
-        {
-            if(i==offset*2)
-            offset=i;
-            dp[i]=1+dp[i-offset];
+    private int popCount(int x) {
+        int count;
+        for(count =0;x!=0;count++) {
+            x&=x-1;
         }
-        return dp;
+        return count;
+    }
+    public int[] countBits(int n) {
+       int[] ans = new int[n+1];
+
+       for(int x=0;x<=n;x++) {
+           ans[x] = popCount(x);
+       }
+        return ans;
     }
 }
 
