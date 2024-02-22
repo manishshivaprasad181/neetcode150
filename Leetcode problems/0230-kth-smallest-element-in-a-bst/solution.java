@@ -1,3 +1,7 @@
+
+
+import com.sun.source.tree.Tree;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -15,12 +19,10 @@
  */
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
-        ArrayList<Integer> arr = inorder(root, new ArrayList<Integer>());
-        return arr.get(k-1);
-        
+       ArrayList<Integer> arr= inorder(root, new ArrayList<Integer>());
+       return arr.get(k-1);
     }
-    private ArrayList<Integer> inorder(TreeNode root, ArrayList<Integer> arr)  {
-
+    private ArrayList<Integer> inorder(TreeNode root, ArrayList<Integer> arr) {
         if(root==null)
             return null;
         inorder(root.left, arr);
@@ -28,4 +30,7 @@ class Solution {
         inorder(root.right, arr);
         return arr;
     }
+ 
 }
+
+
