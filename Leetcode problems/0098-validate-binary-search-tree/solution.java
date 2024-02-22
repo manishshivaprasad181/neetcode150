@@ -21,8 +21,8 @@ class Solution {
             return false;
         return isBST(root.right, root.val, high) && isBST(root.left, low, root.val);
     }
+    
     public boolean isValidBST(TreeNode root) {
-        return isBST(root, null, null);
-
+       return  isBST(root, null, null);
     }
 }
