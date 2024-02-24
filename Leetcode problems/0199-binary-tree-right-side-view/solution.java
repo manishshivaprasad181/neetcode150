@@ -19,33 +19,28 @@ import com.sun.source.tree.Tree;
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-       if(root==null)
+        if(root==null)
             return new ArrayList<Integer>();
+        ArrayDeque<TreeNode> currLevel = new ArrayDeque<TreeNode>();
+        ArrayDeque<TreeNode> nextLevel = new ArrayDeque<>() {{ offer(root);}};
 
-        ArrayDeque<TreeNode> currlevel = new ArrayDeque<>();
-        ArrayDeque<TreeNode> nextlevel = new ArrayDeque<>() {{
-            offer(root);
-        }};
-        List<Integer> rightside = new ArrayList<>();
+        ArrayList<Integer> rightside  = new ArrayList<Integer>();
         TreeNode node = null;
-        while(!nextlevel.isEmpty()) {
-            currlevel= nextlevel;
-            nextlevel =new ArrayDeque<>();
+        while(!nextLevel.isEmpty() ) {
+            currLevel = nextLevel;
+            nextLevel = new ArrayDeque();
 
-            while(!currlevel.isEmpty()) {
-               node =currlevel.poll();
+            while(!currLevel.isEmpty()) {
+                node = currLevel.poll();
 
-                if(node.left !=null)
-                    nextlevel.offer(node.left);
-                if(node.right!=null)
-                    nextlevel.offer(node.right);
+                if(node.left!=null) nextLevel.add(node.left);
+                if(node.right!=null) nextLevel.add(node.right);
+
+
             }
-            if(currlevel.isEmpty())
+            if(currLevel.isEmpty())
                 rightside.add(node.val);
         }
-        return rightside;
-
-
-        
-    }
+       return rightside; 
+    }  
 }
