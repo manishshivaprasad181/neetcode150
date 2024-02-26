@@ -1,16 +1,18 @@
 class MinStack {
-    Stack<Pair<Integer,Integer>> st;
+    Stack<Pair<Integer, Integer>> st;
+
     public MinStack() {
-        st=new Stack<>();
+        st = new Stack<>();
+        
     }
     
     public void push(int val) {
-        if(st.isEmpty())
-            st.push(new Pair<>(val,val));
-        else
+        if(st.isEmpty()) {
+            st.push(new Pair(val, val));
+        } else 
         {
-            int currmin=Math.min(val,st.peek().getValue());
-            st.push(new Pair<>(val,currmin));
+            int currmin = Math.min(val, st.peek().getValue());
+            st.push(new Pair(val, currmin));
         }
     }
     
