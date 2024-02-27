@@ -1,25 +1,21 @@
-
-
-
-
 class Solution {
     public boolean isValid(String s) {
+        HashMap<Character,Character> hm = new HashMap<>();
         Stack<Character> st = new Stack<>();
-        HashMap<Character, Character> hm = new HashMap<>();
 
-        hm.put(']', '[');
-        hm.put('}', '{');
-        hm.put(')', '(');
+        hm.put('}','{');
+        hm.put(']','[');
+        hm.put(')','(');
 
         for(int i=0;i<s.length();i++) {
-            if(hm.containsKey(s.charAt(i)))  {
-                if(!st.isEmpty() && st.peek()==hm.get(s.charAt(i)))
+            if(!hm.containsKey(s.charAt(i)))
+                st.push(s.charAt(i));
+            else {
+                if(!st.isEmpty() && st.peek()== hm.get(s.charAt(i)))
                     st.pop();
                 else
                     return false;
-            } else
-                st.push(s.charAt(i));
-
+            }
         }
         return st.isEmpty();
     }
