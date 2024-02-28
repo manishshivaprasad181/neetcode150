@@ -1,19 +1,16 @@
 class Solution {
-    private int popCount(int x) {
+    private int popcount(int x) {
         int count;
-        for(count =0;x!=0;count++) {
+        for(count=0;x!=0;count++)
             x&=x-1;
-        }
         return count;
     }
     public int[] countBits(int n) {
-       int[] ans = new int[n+1];
+        int[] ans = new int[n+1];
 
-       for(int x=0;x<=n;x++) {
-           ans[x] = popCount(x);
-       }
+        for(int i=0;i<=n;i++) {
+            ans[i]= popcount(i);
+        }
         return ans;
     }
 }
-
-
