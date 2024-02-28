@@ -17,12 +17,11 @@ class Solution {
     public boolean isBST(TreeNode root, Integer low, Integer high) {
         if(root==null)
             return true;
-        if(low!=null && root.val<=low || high!=null && root.val>=high)
+        if(low!=null && low>=root.val || high!=null && high<=root.val)
             return false;
         return isBST(root.right, root.val, high) && isBST(root.left, low, root.val);
     }
-    
     public boolean isValidBST(TreeNode root) {
-       return  isBST(root, null, null);
+        return isBST(root, null, null);
     }
 }
