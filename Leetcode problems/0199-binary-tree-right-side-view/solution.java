@@ -1,7 +1,3 @@
-
-
-import com.sun.source.tree.Tree;
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -19,28 +15,31 @@ import com.sun.source.tree.Tree;
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> rightList =new ArrayList<>();
         if(root==null)
-            return new ArrayList<Integer>();
-        ArrayDeque<TreeNode> currLevel = new ArrayDeque<TreeNode>();
-        ArrayDeque<TreeNode> nextLevel = new ArrayDeque<>() {{ offer(root);}};
+            return new ArrayList<>();
+        ArrayDeque<TreeNode> currList = new ArrayDeque<>();
+        ArrayDeque<TreeNode> nextList = new ArrayDeque<>(){{offer(root);}};
+        
 
-        ArrayList<Integer> rightside  = new ArrayList<Integer>();
         TreeNode node = null;
-        while(!nextLevel.isEmpty() ) {
-            currLevel = nextLevel;
-            nextLevel = new ArrayDeque();
+        
+        while(!nextList.isEmpty()){
+            currList = nextList;
+            nextList = new ArrayDeque<>();
 
-            while(!currLevel.isEmpty()) {
-                node = currLevel.poll();
+            while(!currList.isEmpty()) {
+                node = currList.pop();
 
-                if(node.left!=null) nextLevel.add(node.left);
-                if(node.right!=null) nextLevel.add(node.right);
-
-
+                if(node.left!=null) nextList.add(node.left);
+                if(node.right!=null) nextList.add(node.right);
             }
-            if(currLevel.isEmpty())
-                rightside.add(node.val);
+            if(currList.isEmpty())
+                rightList.add(node.val);
+        
         }
-       return rightside; 
-    }  
+        return rightList;
+        
+        
+    }
 }
