@@ -1,15 +1,15 @@
 class Solution {
-    private double binaryExp(double x, long n) {
+    public double binarExp(double x, long n) {
         if(n==0)
             return 1;
         if(n<0)
-            return 1.0/binaryExp(x, -1*n);
+            return 1/binarExp(x, -1*n);
         if(n%2==1)
-            return x*binaryExp(x*x, (n-1)/2);
-        else 
-            return binaryExp(x*x, n/2);
+            return x*binarExp(x*x, (n-1)/2);
+        else
+            return binarExp(x*x, n/2);
     }
     public double myPow(double x, int n) {
-        return binaryExp(x, (long)n);
+        return binarExp(x, (long)n);
     }
 }
