@@ -1,11 +1,15 @@
+
+
+import static java.lang.Math.max;
+
 class Solution {
     public List<String> generateParenthesis(int n) {
         ArrayList<String> res = new ArrayList<>();
-        backtrack(0,0,"",n,res);
+        backtrack(0,0,"",n, res);
         return res;
     }
     public void backtrack(int open, int close, String str, int max, ArrayList<String> res) {
-        if(str.length()==max*2) {
+        if(str.length()== max*2) {
             res.add(str);
             return;
         }
