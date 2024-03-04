@@ -34,7 +34,6 @@ class Solution {
         for(Node neighbor:node.neighbors) {
             clonenode.neighbors.add(cloneGraph(neighbor));
         }
-        
         return clonenode;
     }
 }
