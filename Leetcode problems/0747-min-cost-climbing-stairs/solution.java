@@ -1,20 +1,12 @@
 class Solution {
-    private HashMap<Integer, Integer> hm = new HashMap<>();
     public int minCostClimbingStairs(int[] cost) {
-        return minimumCost(cost.length,cost);
-        
-    }
+        int[] mincost = new int[cost.length+1];
 
-    private int minimumCost(int i, int[] cost) {
-        if(i<=1)
-            return 0;
-        
-        if(hm.containsKey(i))
-            return hm.get(i);
-        
-        int downOne = cost[i-1]+ minimumCost(i-1, cost);
-        int downTwo = cost[i-2]+ minimumCost(i-2, cost);
-        hm.put(i, Math.min(downOne,downTwo));
-        return hm.get(i);
+        for(int i=2;i<mincost.length;i++) {
+            int takeOneStep = mincost[i-1]+cost[i-1];
+            int takeTwoStep = mincost[i-2]+cost[i-2];
+            mincost[i] = Math.min(takeOneStep, takeTwoStep);
+        }
+        return mincost[mincost.length-1];
     }
 }
