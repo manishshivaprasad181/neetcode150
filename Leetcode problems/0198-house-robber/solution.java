@@ -2,15 +2,15 @@ class Solution {
     public int rob(int[] nums) {
         int N = nums.length;
 
-        int[] maxRobbed = new int[N+1];
+        int[] dp = new int[N+1];
 
-        maxRobbed[N]=0;
-        maxRobbed[N-1]= nums[N-1];
+        dp[N] =0;
+        dp[N-1]=nums[N-1];
 
-        for(int i=N-2;i>=0;i--) {
-            maxRobbed[i] = Math.max(maxRobbed[i+1], maxRobbed[i+2]+nums[i]);
+        for(int i = N-2;i>=0;i--) {
+            dp[i] = Math.max(dp[i+1], dp[i+2]+nums[i]);
         }
+        return dp[0];
         
-        return maxRobbed[0];
     }
 }
