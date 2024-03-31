@@ -7,10 +7,12 @@ class Solution {
             int num = nums[i];
             if(num>sub.get(sub.size()-1))
                 sub.add(num);
+            
             else {
-                int j =0;
+                int j=0;
                 while(num>sub.get(j))
                     j+=1;
+
                 sub.set(j, num);
             }
         }
