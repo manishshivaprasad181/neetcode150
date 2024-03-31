@@ -1,31 +1,18 @@
 class Solution {
-    HashMap<Integer, Integer> memo = new HashMap<>();
     public int numDecodings(String s) {
-        return recursiveWithMemo(0,s);
-    }
+        int[] dp = new int[s.length()+1];
+        dp[0]=1;
 
-    private int recursiveWithMemo(int index, String str) {
-        if(memo.containsKey(index))
-            return memo.get(index);
-        
-     
+        dp[1]= s.charAt(0)=='0'?0:1;
 
+        for(int i=2;i<dp.length;i++) {
+            if(s.charAt(i-1)!='0')
+                dp[i] = dp[i-1];
         
-        if(index== str.length())
-            return 1;
-        
-        if(str.charAt(index)=='0')
-            return 0;
-
-        if(index== str.length()-1)
-            return 1;
-      
-        
-        int ans = recursiveWithMemo(index+1, str);
-        if(Integer.parseInt(str.substring(index, index+2))<=26) 
-            ans+= recursiveWithMemo(index+2, str);
-        
-        memo.put(index, ans);
-        return ans;
+        int twoDigit = Integer.valueOf(s.substring(i-2,i));
+        if(twoDigit>=10 && twoDigit<=26)
+            dp[i]+= dp[i-2];
+        }
+        return dp[s.length()];
     }
 }
