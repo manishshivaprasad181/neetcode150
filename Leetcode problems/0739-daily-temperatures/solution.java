@@ -8,7 +8,6 @@ class Solution {
                 Pair<Integer, Integer> pair = st.pop();
                 int index = pair.getValue();
                 res[index] = i-index;
-
             }
             st.push(new Pair(temperatures[i],i));
         }
