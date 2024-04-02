@@ -1,23 +1,23 @@
 class Solution {
     public int evalRPN(String[] tokens) {
-        HashSet<String> hs =new HashSet<>();
-        Stack<Integer> st= new Stack<>();
+        HashSet<String> set = new HashSet<>();
+        Stack<Integer> st = new Stack<>();
 
-        hs.add("+");
-        hs.add("-");
-        hs.add("/");
-        hs.add("*");
+        set.add("+");
+        set.add("-");
+        set.add("/");
+        set.add("*");
 
         for(int i=0;i<tokens.length;i++) {
-            if(!hs.contains(tokens[i]))
+            if(!set.contains(tokens[i]))
                 st.push(Integer.parseInt(tokens[i]));
             else {
                 if(tokens[i].equals("+"))
                     st.push(st.pop()+st.pop());
                 else if(tokens[i].equals("-")) {
-                    int x = st.pop();
-                    int y = st.pop();
-                    st.push(y-x);
+                        int x = st.pop();
+                        int y = st.pop();
+                        st.push(y-x);
                 } else if(tokens[i].equals("*")) 
                     st.push(st.pop()*st.pop());
                 else {
@@ -25,7 +25,6 @@ class Solution {
                     int y = st.pop();
                     st.push(y/x);
                 }
-
             }
         }
         return st.pop();
