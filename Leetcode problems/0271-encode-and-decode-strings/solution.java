@@ -7,7 +7,6 @@ public class Codec {
         for(String str:strs) {
             encodedString.append(str);
             encodedString.append("π");
-
         }
         return encodedString.toString();
     }
@@ -16,7 +15,6 @@ public class Codec {
     public List<String> decode(String s) {
         String[] decodedString = s.split("π",-1);
         return new ArrayList(Arrays.asList(decodedString).subList(0, decodedString.length-1));
-        
     }
 }
 
