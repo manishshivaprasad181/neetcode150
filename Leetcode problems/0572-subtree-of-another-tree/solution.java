@@ -19,7 +19,7 @@ class Solution {
             return false;
         if(isIdentical(root, subRoot))
             return true;
-        return isSubtree(root.right, subRoot) ||isSubtree(root.left, subRoot);
+        return isSubtree(root.right, subRoot) || isSubtree(root.left, subRoot);
     }
 
     public boolean isIdentical(TreeNode node1, TreeNode node2) {
